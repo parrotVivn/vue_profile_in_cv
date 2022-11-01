@@ -1,30 +1,29 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+/* eslint-disable prettier/prettier */
+import { createRouter, createWebHistory } from "vue-router";
+import devs from "../router/devs";
+import paths from "../router/path";
 
-Vue.use(VueRouter);
+function route({ path, view, name, redirect, children }) {
+  return {
+    name: name || view,
+    path,
+    component: (resolve) => import(`@/views/${view}.vue`).then(resolve),
+    redirect,
+    children,
+  };
+}
 
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
-];
-
-const router = new VueRouter({
+const router = createRouter({
+  base: "/",
   mode: "history",
-  base: process.env.BASE_URL,
-  routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes: [...paths.map((path) => route(path)), ...devs],
 });
+// handler logic login but I not using feature login
+// router.beforeEach((to, from, next) => {
+//   console.log(to);
+//   console.log(from);
+//   console.log(next());
+// });
 
 export default router;

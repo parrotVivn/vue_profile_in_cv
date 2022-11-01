@@ -1,0 +1,18 @@
+$root-image: linear-gradient(315deg, #e7eff9 40%, #cfd6e6 100%);
+.bg-primary-sy {
+  background-image: $root-image;
+}
+@media (min-width: 576px) {
+  .mt-10 {
+    width: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
